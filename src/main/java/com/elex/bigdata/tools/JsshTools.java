@@ -50,14 +50,14 @@ public class JsshTools {
 		Session session = null;
 		Channel channel = null;
 		try {
-			LOG.info("start create session");
+			LOG.info("start create ssh session");
 			session = jsch.getSession(username, ipAddress, DEFAULT_SSH_PORT);
 			session.setPassword(password);
 
 			session.setUserInfo(userInfo);
 			session.connect();
-			LOG.info("session connect complete");
-			LOG.info("start create channel");
+			LOG.info("ssh session connect complete");
+			LOG.info("start create ssh channel");
 			channel = session.openChannel("exec");
 			((ChannelExec) channel).setCommand(command);
 
@@ -65,7 +65,7 @@ public class JsshTools {
 			BufferedReader input = new BufferedReader(new InputStreamReader(channel.getInputStream()));
 
 			channel.connect();
-			LOG.info("channel connect complete");
+			LOG.info("ssh channel connect complete");
 			LOG.info("The remote exec command is: " + command);
 			// command output
 			String line;
@@ -74,7 +74,12 @@ public class JsshTools {
 			}
 			input.close();
 
-
+			returnCode =channel.getExitStatus();
+			if(returnCode == 0 ){
+				LOG.info("The remote exec command is successful");	
+			}else{
+				LOG.error("The remote exec command is failure");
+			}
 		} catch (JSchException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -82,12 +87,6 @@ public class JsshTools {
 		} finally {
 			if (channel != null) {
 				channel.disconnect();
-				returnCode =channel.getExitStatus();
-				if(returnCode == 0 ){
-					LOG.info("The remote exec command is successful");	
-				}else{
-					LOG.error("The remote exec command is failure");
-				}
 			}
 			if (session != null) {
 				session.disconnect();

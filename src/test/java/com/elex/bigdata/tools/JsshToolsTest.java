@@ -23,7 +23,7 @@ public class JsshToolsTest {
 		// ssh.execute("uname -s -r -v");
 		// ssh.execute("cat
 		// /home/yanbit/Desktop/tools/nginx-1.8.0/README");
-		ssh.execute("ls -al /home/yanbit/Desktop");
+		ssh.execute("ls -al /home/yanbit/Desktp");
 
 		Vector<String> stdout = ssh.getStandardOutput();
 		if(ssh.returnCode==0){

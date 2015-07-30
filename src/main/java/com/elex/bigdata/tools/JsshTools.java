@@ -7,7 +7,6 @@ import java.util.Vector;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.elex.bigdata.monitor.MonitorUserInfo;
 import com.jcraft.jsch.Channel;
 import com.jcraft.jsch.ChannelExec;
 import com.jcraft.jsch.ChannelShell;
@@ -27,24 +26,17 @@ public class JsshTools {
 
 	private static final Log LOG = LogFactory.getLog(JsshTools.class);
 
-	// user info
-	private String ipAddress;
-	private String username;
-	private String password;
+	
 	public static final int DEFAULT_SSH_PORT = 22;
-	private Vector<String> stdout;
+	private Vector<String> stdout = new Vector<String>();;
 	
 	// exec cmd default failure
 	public static int returnCode = -1;
 
-	public JsshTools(String ipAddress,String username,String password) {
-		this.ipAddress = ipAddress;
-		this.username = username;
-		this.password = password;
-		stdout = new Vector<String>();
+	public JsshTools() {
 	}
 
-	public int execute(final String command) {
+	public int execute(String command,String username,String password,String ipAddress) {
 		JSch jsch = new JSch();
 		MonitorUserInfo userInfo = new MonitorUserInfo();
 		Session session = null;

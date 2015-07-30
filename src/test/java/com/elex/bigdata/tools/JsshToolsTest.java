@@ -19,11 +19,11 @@ public class JsshToolsTest {
 	@Test
 	public void test() {
 
-		JsshTools ssh = new JsshTools("192.168.159.130", "yanbit", "hadoop");
+		JsshTools ssh = new JsshTools();
 		// ssh.execute("uname -s -r -v");
 		// ssh.execute("cat
 		// /home/yanbit/Desktop/tools/nginx-1.8.0/README");
-		ssh.execute("ls -al /home/yanbit/Desktp");
+		ssh.execute("ls -al /home/yanbit/", "yanbit", "hadoop","192.168.159.130");
 
 		Vector<String> stdout = ssh.getStandardOutput();
 		if(ssh.returnCode==0){

@@ -11,20 +11,20 @@ import org.junit.Test;
 */
 
 public class UtilsTest {
-
+	private Utils util = new Utils();
 	@Test
 	public void testGetList() {
-		System.out.println(Utils.getList("monitor.servers.ip").toString());
+		System.out.println(util.getList("monitor.servers.ip").toString());
 	}
 
 	@Test
 	public void testGetString() {
-		System.out.println(Utils.getString("exec.cmd"));
+		System.out.println(util.getString("exec.cmd"));
 	}
 
 	@Test
 	public void testGetInt() {
-		System.out.println(Utils.getInt("exec.int"));
+		//System.out.println(Utils.getInt("exec.int"));
 	}
 
 }

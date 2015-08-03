@@ -31,11 +31,15 @@ public class MonitorHBaseLog {
 		LOG.info("monitor hbase task running: " + lost + "");
 	}
 
+	/**
+	 * @return ok or other
+	 */
 	public static String execCmd() {
-		String username = Utils.getString("host.username");
-		String passwd = Utils.getString("host.passwd");
-		String cmd = Utils.getString("hbase.exec.cmd");
-		List<Object> hosts = Utils.getList("hbase.monitor.servers.ip");
+		Utils util = new Utils();
+		String username = util.getString("host.username");
+		String passwd = util.getString("host.passwd");
+		String cmd = util.getString("hbase.exec.cmd");
+		List<Object> hosts = util.getList("hbase.monitor.servers.ip");
 
 		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(cmd)
 				|| hosts.size() == 0) {
@@ -47,7 +51,11 @@ public class MonitorHBaseLog {
 			String ipAddress = (String) obj;
 			LOG.info("cmd :"+cmd+" host :"+ipAddress);
 			JsshTools ssh = new JsshTools();
-			ssh.execute(cmd, username, passwd, ipAddress);
+			int ret = ssh.execute(cmd, username, passwd, ipAddress);
+			if (ret != 0 ) {
+				LOG.error("cmd :"+cmd+" host :"+ipAddress+" status :"+"failure");
+				return "cmd failure";
+			}
 			Vector<String> error = ssh.getStandardOutput();
 			for (String err : error) {
 				if (!err.startsWith("ok")) {

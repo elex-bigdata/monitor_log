@@ -17,12 +17,12 @@ import org.apache.commons.logging.LogFactory;
 public class Utils {
 	private static final Log LOG = LogFactory.getLog(Utils.class);
 
-	private static Configuration config;
+	private Configuration config;
 
-	private Utils() {
+	public Utils() {
 	}
 
-	static {
+	{
 		try {
 			config = new PropertiesConfiguration("server.properties");
 		} catch (ConfigurationException e) {
@@ -31,15 +31,15 @@ public class Utils {
 		}
 	}
 
-	public static List<Object> getList(String key) {
+	public List<Object> getList(String key) {
 		return config.getList(key);
 	}
 
-	public static String getString(String key){
+	public String getString(String key) {
 		return config.getString(key);
 	}
-	
-	public static int getInt(String key){
+
+	public int getInt(String key) {
 		return config.getInt(key);
 	}
 }

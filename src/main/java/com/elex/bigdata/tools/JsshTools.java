@@ -36,6 +36,13 @@ public class JsshTools {
 	public JsshTools() {
 	}
 
+	/**
+	 * @param command 
+	 * @param username
+	 * @param password
+	 * @param ipAddress 
+	 * @return 0 successful , other failure
+	 */
 	public int execute(String command,String username,String password,String ipAddress) {
 		JSch jsch = new JSch();
 		MonitorUserInfo userInfo = new MonitorUserInfo();
@@ -87,6 +94,9 @@ public class JsshTools {
 		return returnCode;
 	}
 
+	/**
+	 * @return cmd StandardOutput
+	 */
 	public Vector<String> getStandardOutput() {
 		return stdout;
 	}

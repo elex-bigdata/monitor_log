@@ -1,4 +1,4 @@
-package web;
+package com.elex.bigdata.web;
 
 import org.restlet.Application;
 import org.restlet.Restlet;
@@ -13,7 +13,7 @@ import org.restlet.routing.Router;
 */
 
 public class HBaseApplication extends Application {   
-    public synchronized Restlet createRoot() {     
+    public Restlet createRoot() {     
         Router router = new Router(getContext());     
         router.attachDefault(HBaseHandlerResource.class);     
         return router;     

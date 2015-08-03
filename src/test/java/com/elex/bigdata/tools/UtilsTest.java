@@ -1,10 +1,6 @@
 package com.elex.bigdata.tools;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-
-import com.elex.bigdata.tools.Utils;
 
 /**
 * @author yanbit

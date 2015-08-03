@@ -31,6 +31,9 @@ public class MonitorUserInfo implements UserInfo {
         return false;  
     }  
   
+    /* 
+     * @see com.jcraft.jsch.UserInfo#promptYesNo(java.lang.String)
+     */
     public boolean promptYesNo(final String arg0) {  
         if (arg0.contains("The authenticity of host")) {  
             return true;  

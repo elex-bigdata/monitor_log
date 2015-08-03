@@ -20,10 +20,8 @@ public class Utils {
 	private static Configuration config;
 
 	private Utils() {
-	//	initConfig();
 	}
 
-	//private void initConfig() {
 	static {
 		try {
 			config = new PropertiesConfiguration("server.properties");

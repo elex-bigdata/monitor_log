@@ -28,7 +28,7 @@ public class JsshTools {
 
 	
 	public static final int DEFAULT_SSH_PORT = 22;
-	private Vector<String> stdout = new Vector<String>();;
+	private Vector<String> stdout = new Vector<String>();
 	
 	// exec cmd default failure
 	public static int returnCode = -1;

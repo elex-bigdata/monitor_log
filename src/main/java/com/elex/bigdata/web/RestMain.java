@@ -21,7 +21,9 @@ public class RestMain {
         
         // Attach the sample application.    
         component.getDefaultHost().attach("/monitor/hbase/log",    
-                new HBaseApplication());    
+                new HBaseApplication());   
+        component.getDefaultHost().attach("/monitor/hbase/log/reset",    
+                new HBaseResetApplication());  
         
         // Start the component.    
         component.start();    

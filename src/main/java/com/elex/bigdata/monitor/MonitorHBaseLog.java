@@ -68,4 +68,33 @@ public class MonitorHBaseLog {
 		}
 		return "ok";
 	}
+	
+	/**
+	 * @return true reset success ,false reset failure
+	 */
+	public static boolean execResetCmd() {
+		Utils util = new Utils();
+		String username = util.getString("host.username");
+		String passwd = util.getString("host.passwd");
+		String cmd = util.getString("hbase.exec.reset.cmd");
+		List<Object> hosts = util.getList("hbase.monitor.servers.ip");
+		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(cmd)
+				|| hosts.size() == 0) {
+			LOG.error("host.username and host.passwd and hbase.exec.reset.cmd and monitor.servers.ip is must be not null");
+			return false;
+		}
+
+		for (Object obj : hosts) {
+			String ipAddress = (String) obj;
+			LOG.info("cmd :"+cmd+" host :"+ipAddress);
+			JsshTools ssh = new JsshTools();
+			int ret = ssh.execute(cmd, username, passwd, ipAddress);
+			if (ret != 0 ) {
+				LOG.error("cmd :"+cmd+" host :"+ipAddress+" status :"+"failure");
+				return false;
+			}
+			LOG.info("cmd :"+cmd+" host :"+ipAddress+" status :"+"success");
+		}
+		return true;
+	}
 }

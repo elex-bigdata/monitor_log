@@ -49,26 +49,36 @@ public class MonitorHBaseLog {
 
 		for (Object obj : hosts) {
 			String ipAddress = (String) obj;
-			LOG.info("cmd :"+cmd+" host :"+ipAddress);
+			LOG.info("cmd :" + cmd + " host :" + ipAddress);
 			JsshTools ssh = new JsshTools();
-			int ret = ssh.execute(cmd, username, passwd, ipAddress);
-			if (ret != 0 ) {
-				LOG.error("cmd :"+cmd+" host :"+ipAddress+" status :"+"failure");
-				return "cmd failure";
+			int count = 0;
+			int ret = -1;
+			while (ret != 0) {
+				ret = ssh.execute(cmd, username, passwd, ipAddress);
+				count++;
+				if (count == 5) {
+					break;
+				}
+				if (ret != 0) {
+					System.out.println("---------------------------------------ret" + ret);
+					LOG.error(
+							"cmd :" + cmd + " host :" + ipAddress + " status :" + "failure" + " retry count :" + count);
+				}
 			}
+
 			Vector<String> error = ssh.getStandardOutput();
 			for (String err : error) {
 				if (!err.startsWith("ok")) {
 					System.out.println(error);
-					LOG.error("cmd :"+cmd+" host :"+ipAddress+" status :"+"failure");
+					LOG.error("cmd :" + cmd + " host :" + ipAddress + " status :" + "failure");
 					return "failure";
 				}
 			}
-			LOG.info("cmd :"+cmd+" host :"+ipAddress+" status :"+"success");
+			LOG.info("cmd :" + cmd + " host :" + ipAddress + " status :" + "success");
 		}
 		return "ok";
 	}
-	
+
 	/**
 	 * @return true reset success ,false reset failure
 	 */
@@ -80,20 +90,30 @@ public class MonitorHBaseLog {
 		List<Object> hosts = util.getList("hbase.monitor.servers.ip");
 		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(cmd)
 				|| hosts.size() == 0) {
-			LOG.error("host.username and host.passwd and hbase.exec.reset.cmd and monitor.servers.ip is must be not null");
+			LOG.error(
+					"host.username and host.passwd and hbase.exec.reset.cmd and monitor.servers.ip is must be not null");
 			return false;
 		}
 
 		for (Object obj : hosts) {
 			String ipAddress = (String) obj;
-			LOG.info("cmd :"+cmd+" host :"+ipAddress);
+			LOG.info("cmd :" + cmd + " host :" + ipAddress);
 			JsshTools ssh = new JsshTools();
-			int ret = ssh.execute(cmd, username, passwd, ipAddress);
-			if (ret != 0 ) {
-				LOG.error("cmd :"+cmd+" host :"+ipAddress+" status :"+"failure");
-				return false;
+			int count = 0;
+			int ret = -1;
+			while (ret != 0) {
+				ret = ssh.execute(cmd, username, passwd, ipAddress);
+				count++;
+				if (count == 5) {
+					break;
+				}
+				if (ret != 0) {
+					System.out.println("---------------------------------------ret" + ret);
+					LOG.error(
+							"cmd :" + cmd + " host :" + ipAddress + " status :" + "failure" + " retry count :" + count);
+				}
 			}
-			LOG.info("cmd :"+cmd+" host :"+ipAddress+" status :"+"success");
+			LOG.info("cmd :" + cmd + " host :" + ipAddress + " status :" + "success");
 		}
 		return true;
 	}

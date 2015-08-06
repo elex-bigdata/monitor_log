@@ -16,8 +16,8 @@ public class RestMain {
         // Create a new Component.    
         Component component = new Component();    
         
-        // Add a new HTTP server listening on port 8182.    
-        component.getServers().add(Protocol.HTTP, 8181);    
+        // Add a new HTTP server listening on port 8282.    
+        component.getServers().add(Protocol.HTTP, 8282);    
         
         // Attach the sample application.    
         component.getDefaultHost().attach("/monitor/hbase/log",    

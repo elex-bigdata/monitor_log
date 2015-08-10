@@ -38,21 +38,20 @@ public class MonitorHBaseLog {
 			LOG.error("host.username and host.passwd and exec.hbase.cmd and monitor.servers.ip is must be not null");
 			return "configisnull";
 		}
-
+		JsshTools ssh = new JsshTools();
 		for (Object obj : hosts) {
 			String ipAddress = (String) obj;
 			//LOG.info("cmd :" + cmd + " host :" + ipAddress);
-			JsshTools ssh = new JsshTools();
 			int count = 0;
 			int ret = -1;
 			while (ret != 0) {
 				ret = ssh.execute(cmd, username, passwd, ipAddress);
 				count++;
 				if (count == 5) {
-					break;
+					return "cmd failure";
 				}
 				if (ret != 0) {
-					LOG.info("cmd exec status failure retry count:"+count);
+					LOG.info("cmd exec status failure retry count:"+count+ " ret:"+ret);
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {
@@ -66,7 +65,7 @@ public class MonitorHBaseLog {
 				if (!err.startsWith("ok")) {
 					System.out.println(error);
 					LOG.error("cmd :" + cmd + " host :" + ipAddress + " status :" + "failure");
-					return "failure";
+					return "hbase failure";
 				}
 			}
 			LOG.info("cmd :" + cmd + " host :" + ipAddress + " status :" + "success");

@@ -65,13 +65,12 @@ public class JsshTools {
 			//LOG.info("ssh connect complete");
 			//LOG.info("The remote exec command is: " + command);
 			// command output
+			stdout.clear();
 			String line;
 			while ((line = input.readLine()) != null) {
 				stdout.add(line);
 			}
 			input.close();
-
-			returnCode =channel.getExitStatus();
 //			if(returnCode == 0 ){
 //				LOG.info("The remote exec command is successful");	
 //			}else{
@@ -85,6 +84,7 @@ public class JsshTools {
 			if (channel != null) {
 				channel.disconnect();
 			}
+			returnCode =channel.getExitStatus();
 			if (session != null) {
 				session.disconnect();
 			}

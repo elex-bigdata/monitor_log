@@ -22,14 +22,6 @@ public class MonitorHBaseLog {
 
 	private static final Log LOG = LogFactory.getLog(MonitorHBaseLog.class);
 
-	public static void main(String[] args) {
-		LOG.info("start monitor hbase task");
-		long start = System.currentTimeMillis();
-		execCmd();
-		long lost = System.currentTimeMillis() - start;
-		LOG.info("finish monitor hbase task");
-		LOG.info("monitor hbase task running: " + lost + "");
-	}
 
 	/**
 	 * @return ok or other
@@ -49,7 +41,7 @@ public class MonitorHBaseLog {
 
 		for (Object obj : hosts) {
 			String ipAddress = (String) obj;
-			LOG.info("cmd :" + cmd + " host :" + ipAddress);
+			//LOG.info("cmd :" + cmd + " host :" + ipAddress);
 			JsshTools ssh = new JsshTools();
 			int count = 0;
 			int ret = -1;
@@ -60,9 +52,12 @@ public class MonitorHBaseLog {
 					break;
 				}
 				if (ret != 0) {
-					System.out.println("---------------------------------------ret" + ret);
-					LOG.error(
-							"cmd :" + cmd + " host :" + ipAddress + " status :" + "failure" + " retry count :" + count);
+					LOG.info("cmd exec status failure retry count:"+count);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 
@@ -97,7 +92,7 @@ public class MonitorHBaseLog {
 
 		for (Object obj : hosts) {
 			String ipAddress = (String) obj;
-			LOG.info("cmd :" + cmd + " host :" + ipAddress);
+			//LOG.info("cmd :" + cmd + " host :" + ipAddress);
 			JsshTools ssh = new JsshTools();
 			int count = 0;
 			int ret = -1;
@@ -108,9 +103,12 @@ public class MonitorHBaseLog {
 					break;
 				}
 				if (ret != 0) {
-					System.out.println("---------------------------------------ret" + ret);
-					LOG.error(
-							"cmd :" + cmd + " host :" + ipAddress + " status :" + "failure" + " retry count :" + count);
+					LOG.info("cmd exec status failure retry count:"+count);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
 				}
 			}
 			LOG.info("cmd :" + cmd + " host :" + ipAddress + " status :" + "success");

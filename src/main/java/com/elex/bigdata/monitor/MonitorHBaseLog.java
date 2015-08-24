@@ -49,7 +49,7 @@ public class MonitorHBaseLog {
 					return "cmd failure";
 				}
 				if (ret != 0) {
-					LOG.info("cmd exec status failure retry count:"+count+ " ret:"+ret);
+					LOG.info("cmd exec status failure ipAddress:"+ipAddress+" retry count:"+count+ " ret:"+ret);
 					try {
 						Thread.sleep(500);
 					} catch (InterruptedException e) {

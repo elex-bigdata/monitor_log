@@ -32,7 +32,6 @@ public class MonitorHBaseLog {
 		String passwd = util.getString("host.passwd");
 		String cmd = util.getString("hbase.exec.cmd");
 		List<Object> hosts = util.getList("hbase.monitor.servers.ip");
-
 		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(cmd)
 				|| hosts.size() == 0) {
 			LOG.error("host.username and host.passwd and exec.hbase.cmd and monitor.servers.ip is must be not null");
@@ -41,7 +40,6 @@ public class MonitorHBaseLog {
 		JsshTools ssh = new JsshTools();
 		for (Object obj : hosts) {
 			String ipAddress = (String) obj;
-			//LOG.info("cmd :" + cmd + " host :" + ipAddress);
 			int count = 0;
 			int ret = -1;
 			while (ret != 0) {
@@ -68,8 +66,8 @@ public class MonitorHBaseLog {
 					return "hbase failure";
 				}
 			}
-			LOG.info("cmd :" + cmd + " host :" + ipAddress + " status :" + "success");
 		}
+		LOG.info("cmd :" + cmd + " host :" + hosts + " status :" + "success");
 		return "ok";
 	}
 

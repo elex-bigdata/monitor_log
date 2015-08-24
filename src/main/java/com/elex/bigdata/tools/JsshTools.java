@@ -33,69 +33,69 @@ public class JsshTools {
 	// exec cmd default failure
 	public static int returnCode = -1;
 
-	public JsshTools() {
-	}
+  public JsshTools() {
+  }
 
-	/**
-	 * @param command 
-	 * @param username
-	 * @param password
-	 * @param ipAddress 
-	 * @return 0 successful , other failure
-	 */
-	public int execute(String command,String username,String password,String ipAddress) {
-		JSch jsch = new JSch();
-		MonitorUserInfo userInfo = new MonitorUserInfo();
-		Session session = null;
-		Channel channel = null;
-		try {
-			//LOG.info("start ssh create connection");
-			session = jsch.getSession(username, ipAddress, DEFAULT_SSH_PORT);
-			session.setPassword(password);
-			session.setUserInfo(userInfo);
-			session.connect();
-			
-			channel = session.openChannel("exec");
-			((ChannelExec) channel).setCommand(command);
+  /**
+   * @param command 
+   * @param username
+   * @param password
+   * @param ipAddress 
+   * @return 0 successful , other failure
+   */
+  public int execute(String command,String username,String password,String ipAddress) {
+    JSch jsch = new JSch();
+    MonitorUserInfo userInfo = new MonitorUserInfo();
+    Session session = null;
+    Channel channel = null;
+    try {
+      //LOG.info("start ssh create connection");
+      session = jsch.getSession(username, ipAddress, DEFAULT_SSH_PORT);
+      session.setPassword(password);
+      session.setUserInfo(userInfo);
+      session.connect();
+      
+      channel = session.openChannel("exec");
+      ((ChannelExec) channel).setCommand(command);
 
-			channel.setInputStream(null);
-			BufferedReader input = new BufferedReader(new InputStreamReader(channel.getInputStream()));
+      channel.setInputStream(null);
+      BufferedReader input = new BufferedReader(new InputStreamReader(channel.getInputStream()));
 
-			channel.connect();
-			//LOG.info("ssh connect complete");
-			//LOG.info("The remote exec command is: " + command);
-			// command output
-			stdout.clear();
-			String line;
-			while ((line = input.readLine()) != null) {
-				stdout.add(line);
-			}
-			input.close();
-//			if(returnCode == 0 ){
-//				LOG.info("The remote exec command is successful");	
-//			}else{
-//				LOG.error("The remote exec command is failure");
-//			}
-		} catch (JSchException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		} finally {
-			if (channel != null) {
-				channel.disconnect();
-			}
-			returnCode =channel.getExitStatus();
-			if (session != null) {
-				session.disconnect();
-			}
-		}
-		return returnCode;
-	}
+      channel.connect();
+      //LOG.info("ssh connect complete");
+      //LOG.info("The remote exec command is: " + command);
+      // command output
+      stdout.clear();
+      String line;
+      while ((line = input.readLine()) != null) {
+        stdout.add(line);
+      }
+      input.close();
+//      if(returnCode == 0 ){
+//        LOG.info("The remote exec command is successful");  
+//      }else{
+//        LOG.error("The remote exec command is failure");
+//      }
+    } catch (JSchException e) {
+      e.printStackTrace();
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      if (channel != null) {
+        channel.disconnect();
+      }
+      returnCode =channel.getExitStatus();
+      if (session != null) {
+        session.disconnect();
+      }
+    }
+    return returnCode;
+  }
 
-	/**
-	 * @return cmd StandardOutput
-	 */
-	public Vector<String> getStandardOutput() {
-		return stdout;
-	}
+  /**
+   * @return cmd StandardOutput
+   */
+  public Vector<String> getStandardOutput() {
+    return stdout;
+  }
 }

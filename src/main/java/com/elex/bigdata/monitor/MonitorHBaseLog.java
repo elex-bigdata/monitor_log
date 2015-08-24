@@ -99,7 +99,7 @@ public class MonitorHBaseLog {
 				ret = ssh.execute(cmd, username, passwd, ipAddress);
 				count++;
 				if (count == 5) {
-					break;
+				  return false;
 				}
 				if (ret != 0) {
 					LOG.info("cmd exec status failure retry count:"+count);

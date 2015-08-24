@@ -32,6 +32,7 @@ public class MonitorHBaseLog {
 		String passwd = util.getString("host.passwd");
 		String cmd = util.getString("hbase.exec.cmd");
 		List<Object> hosts = util.getList("hbase.monitor.servers.ip");
+		LOG.info("start execute "+ "cmd :" + cmd + " host :" + hosts);
 		if (StringUtils.isEmpty(username) || StringUtils.isEmpty(passwd) || StringUtils.isEmpty(cmd)
 				|| hosts.size() == 0) {
 			LOG.error("host.username and host.passwd and exec.hbase.cmd and monitor.servers.ip is must be not null");

@@ -1,1 +1,33 @@
-15/08/24 15:16:27 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 16:43:42 INFO monitor.MonitorHBaseLog: cmd exec status failure retry count:1 ret:-1
+15/08/24 16:43:43 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 16:43:43 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 16:43:43 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 16:43:43 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 16:43:44 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 16:56:01 INFO web.RestMain: starting the http server on port:8282
+15/08/24 17:03:07 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 17:04:14 INFO web.RestMain: starting the http server on port:8282
+15/08/24 17:04:51 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 17:04:51 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :127.0.0.1 status :success
+15/08/24 17:04:51 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :localhost status :success
+15/08/24 17:05:09 INFO web.RestMain: starting the http server on port:8282
+15/08/24 17:07:30 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.133 status :success
+15/08/24 17:08:29 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :127.0.0.1 status :success
+15/08/24 17:08:56 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :localhost status :success
+15/08/24 17:27:58 INFO web.RestMain: starting the http server on port:8282
+15/08/24 17:28:04 INFO monitor.MonitorHBaseLog: --------------------[192.168.159.133, 127.0.0.1, localhost]
+15/08/24 17:28:05 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :[192.168.159.133, 127.0.0.1, localhost] status :success
+15/09/11 10:25:29 INFO web.RestMain: starting the http server on port:8282
+15/09/11 10:26:06 INFO monitor.MonitorHBaseLog: start execute cmd :cat /home/yanbit/test.txt host :[192.168.159.133, 127.0.0.1, localhost]
+15/09/11 10:27:04 INFO web.RestMain: starting the http server on port:8282
+15/09/11 10:33:16 INFO web.RestMain: starting the http server on port:8282
+15/09/11 10:38:55 INFO monitor.MonitorHBaseLog: start execute cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost]
+15/09/11 10:38:57 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost] status :success
+15/09/11 10:44:51 INFO web.RestMain: starting the http server on port:8282
+15/09/11 10:46:01 INFO monitor.MonitorHBaseLog: start execute cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost]
+15/09/11 10:46:02 INFO monitor.MonitorHBaseLog: cmd exec status failure ipAddress:192.168.159.134 retry count:1 ret:-1
+15/09/11 10:46:03 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost] status :success
+15/09/11 10:48:21 INFO monitor.MonitorHBaseLog: start execute cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost]
+15/09/11 10:48:21 ERROR monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :192.168.159.134 status :failure
+15/09/11 10:48:55 INFO monitor.MonitorHBaseLog: start execute cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost]
+15/09/11 10:48:55 INFO monitor.MonitorHBaseLog: cmd :cat /home/yanbit/test.txt host :[192.168.159.134, 127.0.0.1, localhost] status :success

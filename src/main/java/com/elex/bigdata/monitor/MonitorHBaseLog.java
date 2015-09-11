@@ -41,6 +41,11 @@ public class MonitorHBaseLog {
     JsshTools ssh = new JsshTools();
     for (Object obj : hosts) {
       String ipAddress = (String) obj;
+      if (ipAddress.equals("192.168.1.142")) {
+        cmd = "cat /tmp/sjfx-dataloader_flush.out";
+      }else{
+        cmd = "cat /tmp/sjfx-hadoop2.out";
+      }
       int count = 0;
       int ret = -1;
       while (ret != 0) {

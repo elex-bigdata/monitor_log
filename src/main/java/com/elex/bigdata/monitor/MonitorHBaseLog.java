@@ -1,14 +1,13 @@
 package com.elex.bigdata.monitor;
 
-import java.util.List;
-import java.util.Vector;
-
+import com.elex.bigdata.tools.JsshTools;
+import com.elex.bigdata.tools.Utils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import com.elex.bigdata.tools.JsshTools;
-import com.elex.bigdata.tools.Utils;
+import java.util.List;
+import java.util.Vector;
 
 /**
  * @author yanbit
@@ -70,20 +69,17 @@ public class MonitorHBaseLog {
         LOG.info("cmd :" + cmd + " host :" + hosts + " status :" + "success");
         return "ok";
       } else {
-        LOG.error(
-            "cmd :" + cmd + " host :" + ipAddress + " status :" + "failure");
-        return "hbase failure";
+        for (String err :error){
+          if (err.contains("EventFlushChildTask")){ // monitor hbase event
+            LOG.error(
+                    "cmd :" + cmd + " host :" + ipAddress + " status :" + "failure");
+            return "hbase failure";
+          }
+        }
+        LOG.info("cmd :" + cmd + " host :" + hosts + " status :" + "success");
+        return "ok";
       }
-      // for (String err : error) {
-      // if (!err.startsWith("ok")) {
-      // System.out.println(error);
-      // LOG.error("cmd :" + cmd + " host :" + ipAddress + " status :" +
-      // "failure");
-      // return "hbase failure";
-      // }
-      // }
     }
-//    LOG.info("cmd :" + cmd + " host :" + hosts + " status :" + "success");
     return "ok";
   }
 

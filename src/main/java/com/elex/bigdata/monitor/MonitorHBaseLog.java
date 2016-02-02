@@ -67,7 +67,6 @@ public class MonitorHBaseLog {
       Vector<String> error = ssh.getStandardOutput();
       if (error.isEmpty()) {
         LOG.info("cmd :" + cmd + " host :" + hosts + " status :" + "success");
-        return "ok";
       } else {
         for (String err :error){
           if (err.contains("EventFlushChildTask")){ // monitor hbase event
@@ -77,7 +76,6 @@ public class MonitorHBaseLog {
           }
         }
         LOG.info("cmd :" + cmd + " host :" + hosts + " status :" + "success");
-        return "ok";
       }
     }
     return "ok";
